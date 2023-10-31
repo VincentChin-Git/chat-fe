@@ -2,6 +2,8 @@ import { IHttpData, IHttpErrorData } from '@/types/request';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
+const baseUrl = process.env.SERVER_BASE_URL;
+
 const getRequest = async (url: string, params: any) => {
   const authToken = await AsyncStorage.getItem('userAuthToken');
   const headers = authToken
@@ -12,7 +14,7 @@ const getRequest = async (url: string, params: any) => {
     : { 'Content-Type': 'application/json' };
   return new Promise(async (resolve, reject) => {
     try {
-      const res: IHttpData = await axios.get(url, {
+      const res: IHttpData = await axios.get(baseUrl + url, {
         params,
         headers,
       });
@@ -36,7 +38,7 @@ const postRequest = async (url: string, data: any) => {
     : { 'Content-Type': 'application/json' };
   return new Promise(async (resolve, reject) => {
     try {
-      const res: IHttpData = await axios.post(url, data, { headers });
+      const res: IHttpData = await axios.post(baseUrl + url, data, { headers });
       if (res.success) resolve(res.data);
       else reject('Please try again later');
     } catch (error) {
