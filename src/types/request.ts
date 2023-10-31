@@ -1,4 +1,4 @@
-export interface httpData {
+export interface IHttpData {
   /* data received from server */
   data: any;
   /* status code */
@@ -7,7 +7,7 @@ export interface httpData {
   success: boolean;
 }
 
-export interface httpErrorData {
+export interface IHttpErrorData {
   /* error code */
   errCode: string;
   /* error msg */
