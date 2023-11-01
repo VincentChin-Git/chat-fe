@@ -49,6 +49,22 @@ const postRequest = async (url: string, data: any) => {
   });
 };
 
-const request = { get: getRequest, post: postRequest };
+const putRequest = async (url: string, data: any) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const res = await axios.put(url, data);
+      if (res.status == 200) resolve(true);
+      else {
+        console.log('upload failed', res);
+        reject('Please try again later');
+      }
+    } catch (error) {
+      console.log('upload failed', error);
+      reject('Please try again later');
+    }
+  });
+};
+
+const request = { get: getRequest, post: postRequest, put: putRequest };
 
 export default request;
