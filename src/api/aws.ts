@@ -10,7 +10,7 @@ const uploadVideoSignature = async (payload: any) => {
   return request.get(prefix + '/uploadVideoSignature', payload);
 };
 
-const directUpload = async (url: any, blob: Blob) => {
+const directUpload = async (url: string, blob: Blob) => {
   return request.put(url, blob);
 };
 
