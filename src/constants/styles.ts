@@ -1,33 +1,38 @@
 import { StyleSheet } from 'react-native';
 
-export const commonStylesC = {
-  themeColor1: '#5B0888',
-  themeColor2: '#713ABE ',
-  themeColor3: '#9D76C1',
-  backgroundColor: '#E5CFF7',
-  textColor: '#333',
-  overlayBg: 'rgba(0,0,0,0.3)',
-  piechartStartColor: '#240038',
-  piechartEndColor: '#F3DBFF',
+import { IThemeOption } from '@/types/theme';
+
+export const themeConfig = {
+  [IThemeOption.DARK]: {
+    bgColor: '#000000',
+    bgColor2: '#1a1a1a',
+    contrast: '#ffffff', // probably used for icon
+    textColor: '#ffffff',
+    textLight: '#666666',
+    overlayBg: 'rgba(0,0,0,0.3)',
+  },
+  [IThemeOption.LIGHT]: {
+    bgColor: '#ffffff',
+    bgColor2: '#e6e6e6',
+    contrast: '#000000', // probably used for icon
+    textColor: '#000000',
+    textLight: '#999999',
+    overlayBg: 'rgba(0,0,0,0.3)',
+  },
 };
 
-export const chartColors = [
-  '#240038',
-  '#3B0055',
-  '#53006C',
-  '#6A0083',
-  '#81009A',
-  '#9900B1',
-  '#B000C9',
-  '#C800E0',
-  '#DF00F7',
-  '#E429FF',
-  '#E74DFF',
-  '#EA70FF',
-  '#ED94FF',
-  '#F0B8FF',
-  '#F3DBFF',
-  '#F6FFFF',
+export const blackToWhite = [
+  '#000000',
+  '#1a1a1a',
+  '#333333',
+  '#4d4d4d',
+  '#666666',
+  '#808080',
+  '#999999',
+  '#b3b3b3',
+  '#cccccc',
+  '#e6e6e6',
+  '#ffffff',
 ];
 
 export const commonStyles = StyleSheet.create({

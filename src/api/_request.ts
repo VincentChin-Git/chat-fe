@@ -1,6 +1,7 @@
-import { IHttpData, IHttpErrorData } from '@/types/request';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
+
+import { IHttpData, IHttpErrorData } from '@/types/request';
 
 const baseUrl = process.env.SERVER_BASE_URL;
 
@@ -19,11 +20,11 @@ const getRequest = async (url: string, params: any) => {
         headers,
       });
       if (res.success) resolve(res.data);
-      else reject('Please try again later');
+      else reject(new Error('Please try again later'));
     } catch (error) {
       const err = error as IHttpErrorData;
       console.log(err.errMessage, url);
-      reject(err.errMessage);
+      reject(new Error(err.errMessage));
     }
   });
 };
@@ -40,11 +41,11 @@ const postRequest = async (url: string, data: any) => {
     try {
       const res: IHttpData = await axios.post(baseUrl + url, data, { headers });
       if (res.success) resolve(res.data);
-      else reject('Please try again later');
+      else reject(new Error('Please try again later'));
     } catch (error) {
       const err = error as IHttpErrorData;
       console.log(err.errMessage, url);
-      reject(err.errMessage);
+      reject(new Error(err.errMessage));
     }
   });
 };
@@ -53,14 +54,14 @@ const putRequest = async (url: string, data: any) => {
   return new Promise(async (resolve, reject) => {
     try {
       const res = await axios.put(url, data);
-      if (res.status == 200) resolve(true);
+      if (res.status === 200) resolve(true);
       else {
         console.log('upload failed', res);
-        reject('Please try again later');
+        reject(new Error('Please try again later'));
       }
     } catch (error) {
       console.log('upload failed', error);
-      reject('Please try again later');
+      reject(new Error('Please try again later'));
     }
   });
 };
