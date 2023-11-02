@@ -1,10 +1,4 @@
-import {
-  House,
-  CreditCard,
-  User,
-  IconProps,
-  ChartBar,
-} from 'phosphor-react-native';
+import { IconProps, ChatDots, Users, Gear } from 'phosphor-react-native';
 import React from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { useSelector } from 'react-redux';
@@ -23,10 +17,9 @@ const Footer = ({
     Icon: (props: IconProps) => React.JSX.Element;
     to: string;
   }[] = [
-    { Icon: House, to: 'Home' },
-    { Icon: CreditCard, to: 'Transaction' },
-    { Icon: ChartBar, to: 'Statistic' },
-    { Icon: User, to: 'Profile' },
+    { Icon: ChatDots, to: 'Home' },
+    { Icon: Users, to: 'Contacts' },
+    { Icon: Gear, to: 'Setting' },
   ];
 
   const theme = useSelector((state: any) => state.theme as ITheme);
@@ -54,7 +47,7 @@ const Footer = ({
           <Icon
             size={28}
             weight={selected === index ? 'fill' : 'regular'}
-            color={themeConfig[theme.theme].bgColor}
+            color={themeConfig[theme.theme].contrast}
           />
         </TouchableOpacity>
       ))}

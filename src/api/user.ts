@@ -6,7 +6,7 @@ const changePassword = async (payload: any) => {
   return request.post(prefix + '/changePassword', payload);
 };
 
-const getUserInfoByToken = async (payload: any) => {
+const getUserInfoByToken = async (payload?: any) => {
   return request.get(prefix + '/getUserInfoByToken', payload);
 };
 

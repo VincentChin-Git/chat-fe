@@ -1,0 +1,49 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+
+import userApi from '@/api/user';
+import Loading from '@/components/common/Loading';
+import { loginAction } from '@/store/sliceUser';
+import IUser from '@/types/user';
+
+const Index = ({ navigation }: any) => {
+  const dispatch = useDispatch();
+
+  const handleGetUserByToken = async () => {
+    try {
+      const token = await AsyncStorage.getItem('userAuthToken');
+      if (!token) return handleNoLogin();
+      const userInfo = (await userApi.getUserInfoByToken()) as {
+        userData: IUser;
+        token: string;
+      };
+      console.log(userInfo, 'get user info by token');
+
+      // has userInfo
+      if (userInfo?.userData?._id) {
+        dispatch(
+          loginAction({ user: userInfo.userData, token: userInfo.token }),
+        );
+
+        navigation.reset({ index: 0, routes: [{ name: 'Home' }] });
+      }
+      // no userInfo
+      else handleNoLogin();
+    } catch (error) {
+      console.error(error, 'errGetUserInfo');
+    }
+  };
+
+  const handleNoLogin = () => {
+    navigation.reset({ index: 0, routes: [{ name: 'Login' }] });
+  };
+
+  useEffect(() => {
+    handleGetUserByToken();
+  }, []);
+
+  return <Loading />;
+};
+
+export default Index;
