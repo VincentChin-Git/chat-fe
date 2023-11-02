@@ -2,6 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
 import { IHttpData, IHttpErrorData } from '@/types/request';
+import toast from '@/utils/toast';
 
 const baseUrl = process.env.SERVER_BASE_URL;
 
@@ -24,6 +25,7 @@ const getRequest = async (url: string, params: any) => {
     } catch (error) {
       const err = error as IHttpErrorData;
       console.log(err.errMessage, url);
+      toast(err.errMessage);
       reject(new Error(err.errMessage));
     }
   });
@@ -45,6 +47,7 @@ const postRequest = async (url: string, data: any) => {
     } catch (error) {
       const err = error as IHttpErrorData;
       console.log(err.errMessage, url);
+      toast(err.errMessage);
       reject(new Error(err.errMessage));
     }
   });

@@ -1,7 +1,8 @@
 import * as ImagePicker from 'expo-image-picker';
-import { ToastAndroid } from 'react-native';
 
 // import { uploadFiles, getFiles } from '@/services/storage';
+import toast from './toast';
+
 import uriToBlob from '@/utils/uriToBlob';
 
 const selectMedia = async ({
@@ -36,7 +37,7 @@ const selectMedia = async ({
       }));
       // validate
       if (!tempFileList || !tempFileList.length) {
-        ToastAndroid.show('No Media Selected', ToastAndroid.SHORT);
+        toast('No Media Selected');
         return [];
       }
 
@@ -45,10 +46,7 @@ const selectMedia = async ({
       );
 
       if (errorMedia.length) {
-        ToastAndroid.show(
-          'Invalid photo, please try again',
-          ToastAndroid.SHORT,
-        );
+        toast('Invalid photo, please try again');
         return [];
       }
       // end validate

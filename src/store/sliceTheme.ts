@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { IThemeOption } from '@/types/theme';
 
-const initialState = { themeColor: '#ff4262', theme: 'light' };
+const initialState = { themeColor: '#ff4262', theme: IThemeOption.LIGHT };
 
 const themeSlice = createSlice({
   name: 'user',
@@ -29,5 +29,5 @@ const themeSlice = createSlice({
   },
 });
 
-export const { setThemeColorAction } = themeSlice.actions;
+export const { setThemeColorAction, setThemeAction } = themeSlice.actions;
 export default themeSlice.reducer;

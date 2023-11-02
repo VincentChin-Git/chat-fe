@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 
 import userApi from '@/api/user';
 import Loading from '@/components/common/Loading';
+import { setThemeAction, setThemeColorAction } from '@/store/sliceTheme';
 import { loginAction } from '@/store/sliceUser';
 import IUser from '@/types/user';
 
@@ -39,7 +40,20 @@ const Index = ({ navigation }: any) => {
     navigation.reset({ index: 0, routes: [{ name: 'Login' }] });
   };
 
+  const setupTheme = async () => {
+    try {
+      const themeColor = await AsyncStorage.getItem('themeColor');
+      if (themeColor) dispatch(setThemeColorAction(themeColor));
+
+      const theme = await AsyncStorage.getItem('theme');
+      if (theme) dispatch(setThemeAction(theme));
+    } catch (error) {
+      console.error(error, 'setupThemeErr');
+    }
+  };
+
   useEffect(() => {
+    setupTheme();
     handleGetUserByToken();
   }, []);
 

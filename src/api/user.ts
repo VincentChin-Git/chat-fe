@@ -2,8 +2,20 @@ import request from './_request';
 
 const prefix = '/user';
 
+const addForgetPassword = async (payload: any) => {
+  return request.post(prefix + '/addForgetPassword', payload);
+};
+
 const changePassword = async (payload: any) => {
   return request.post(prefix + '/changePassword', payload);
+};
+
+const forgetPassword = async (payload?: any) => {
+  return request.post(prefix + '/forgetPassword', payload);
+};
+
+const getForgetPassCode = async (payload?: any) => {
+  return request.get(prefix + '/getForgetPassCode', payload);
 };
 
 const getUserInfoByToken = async (payload?: any) => {
@@ -27,7 +39,10 @@ const updateUserInfo = async (payload: any) => {
 };
 
 const userApi = {
+  addForgetPassword,
   changePassword,
+  forgetPassword,
+  getForgetPassCode,
   getUserInfoByToken,
   login,
   searchUser,
