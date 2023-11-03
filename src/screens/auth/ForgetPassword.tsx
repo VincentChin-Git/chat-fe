@@ -11,7 +11,7 @@ const ForgetPassword = ({ navigation }: any) => {
 
   const handleGetCode = async () => {
     if (control.isBlock) return;
-    if (!form.mobile || form.mobile.length != 8) {
+    if (!form.mobile || form.mobile.length !== 8) {
       return toast('Please insert correct number');
     }
     setControl({ ...control, isBlock: true });

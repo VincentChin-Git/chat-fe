@@ -1,5 +1,5 @@
 const appConfig = {
-  appTitle: 'To Be Decide',
+  appTitle: 'Conversa',
 };
 
 export default appConfig;

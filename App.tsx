@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 
 import ForgetPassword from './src/screens/auth/ForgetPassword';
 import Login from './src/screens/auth/Login';
+import ResetPassword from './src/screens/auth/ResetPassword';
 import Signup from './src/screens/auth/Signup';
 import Chat from './src/screens/chat/Chat';
 import Contact from './src/screens/contact/Contact';
@@ -30,11 +31,14 @@ export default function App() {
     { name: 'Index', elem: Index },
     { name: 'Login', elem: Login },
     { name: 'NewContact', elem: NewContact },
+    { name: 'ResetPassword', elem: ResetPassword },
     { name: 'SearchContact', elem: SearchContact },
     { name: 'Setting', elem: Setting },
     { name: 'SettingDetail', elem: SettingDetail },
     { name: 'Signup', elem: Signup },
   ];
+
+  console.log(process.env.EXPO_PUBLIC_API_URL, 'Config');
 
   return (
     <Provider store={appStore}>

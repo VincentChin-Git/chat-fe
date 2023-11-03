@@ -33,7 +33,7 @@ const ResetPassword = ({ navigation, route }: any) => {
       return toast('Password needs at least 8 character');
     }
 
-    if (form.pass != form.comfirmPass) {
+    if (form.pass !== form.comfirmPass) {
       return toast('Passwords are not same');
     }
 

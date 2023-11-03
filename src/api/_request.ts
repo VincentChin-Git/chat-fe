@@ -4,7 +4,7 @@ import axios from 'axios';
 import { IHttpData, IHttpErrorData } from '../types/request';
 import toast from '../utils/toast';
 
-const baseUrl = process.env.SERVER_BASE_URL;
+const baseUrl = process.env.EXPO_PUBLIC_API_URL;
 
 const getRequest = async (url: string, params: any) => {
   const authToken = await AsyncStorage.getItem('userAuthToken');
@@ -16,14 +16,18 @@ const getRequest = async (url: string, params: any) => {
     : { 'Content-Type': 'application/json' };
   return new Promise(async (resolve, reject) => {
     try {
-      const res: IHttpData = await axios.get(baseUrl + url, {
-        params,
-        headers,
-      });
+      const res: IHttpData = (
+        await axios.get(baseUrl + url, {
+          params,
+          headers,
+        })
+      ).data;
+      console.log(res, url);
       if (res.success) resolve(res.data);
       else reject(new Error('Please try again later'));
     } catch (error) {
       const err = error as IHttpErrorData;
+      if (!err || !err.errMessage) return;
       console.log(err.errMessage, url);
       toast(err.errMessage);
       reject(new Error(err.errMessage));
@@ -41,11 +45,15 @@ const postRequest = async (url: string, data: any) => {
     : { 'Content-Type': 'application/json' };
   return new Promise(async (resolve, reject) => {
     try {
-      const res: IHttpData = await axios.post(baseUrl + url, data, { headers });
+      const res: IHttpData = (
+        await axios.post(baseUrl + url, data, { headers })
+      ).data;
+      console.log(res, url);
       if (res.success) resolve(res.data);
       else reject(new Error('Please try again later'));
     } catch (error) {
       const err = error as IHttpErrorData;
+      if (!err || !err.errMessage) return;
       console.log(err.errMessage, url);
       toast(err.errMessage);
       reject(new Error(err.errMessage));

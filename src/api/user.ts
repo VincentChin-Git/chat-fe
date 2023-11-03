@@ -18,8 +18,8 @@ const getForgetPassCode = async (payload?: any) => {
   return request.get(prefix + '/getForgetPassCode', payload);
 };
 
-const getUserInfoByToken = async (payload?: any) => {
-  return request.get(prefix + '/getUserInfoByToken', payload);
+const getUserInfoByToken = async () => {
+  return request.get(prefix + '/getUserInfoByToken', {});
 };
 
 const login = async (payload: any) => {

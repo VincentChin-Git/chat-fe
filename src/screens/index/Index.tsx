@@ -15,6 +15,7 @@ const Index = ({ navigation }: any) => {
     try {
       const token = await AsyncStorage.getItem('userAuthToken');
       if (!token) return handleNoLogin();
+      console.log('123');
       const userInfo = (await userApi.getUserInfoByToken()) as {
         userData: IUser;
         token: string;
@@ -32,6 +33,8 @@ const Index = ({ navigation }: any) => {
       // no userInfo
       else handleNoLogin();
     } catch (error) {
+      await AsyncStorage.removeItem('userAuthToken');
+      handleNoLogin();
       console.error(error, 'errGetUserInfo');
     }
   };

@@ -9,6 +9,7 @@ export const themeConfig = {
     contrast: '#ffffff', // probably used for icon
     textColor: '#ffffff',
     textLight: '#666666',
+    textLight2: '#333333',
     overlayBg: 'rgba(0,0,0,0.3)',
   },
   [IThemeOption.LIGHT]: {
@@ -17,6 +18,7 @@ export const themeConfig = {
     contrast: '#000000', // probably used for icon
     textColor: '#000000',
     textLight: '#999999',
+    textLight2: '#cccccc',
     overlayBg: 'rgba(0,0,0,0.3)',
   },
 };

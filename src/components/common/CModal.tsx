@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 
 import { themeConfig } from '../../constants/styles';
 import { ITheme } from '../../types/theme';
+import invertColor from '../../utils/invertColor';
 
 const CModal = ({
   show = false,
@@ -79,8 +80,8 @@ const CModal = ({
                 <Text
                   style={{
                     ...modalButton,
-                    backgroundColor: themeConfig[theme.theme].bgColor,
-                    color: '#fff',
+                    backgroundColor: theme.themeColor,
+                    color: invertColor(theme.themeColor),
                   }}
                   onPress={handleConfirm}>
                   {confirmText}
