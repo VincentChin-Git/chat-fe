@@ -3,11 +3,11 @@ import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
-import userApi from '@/api/user';
-import { commonStyles, themeConfig } from '@/constants/styles';
-import { loginAction } from '@/store/sliceUser';
-import { ITheme } from '@/types/theme';
-import IUser from '@/types/user';
+import userApi from '../../api/user';
+import { commonStyles, themeConfig } from '../../constants/styles';
+import { loginAction } from '../../store/sliceUser';
+import { ITheme } from '../../types/theme';
+import IUser from '../../types/user';
 
 const Signup = ({ navigation }: any) => {
   const [form, setForm] = useState({

@@ -2,8 +2,8 @@ import React from 'react';
 import { Modal, TouchableOpacity } from 'react-native';
 import { useSelector } from 'react-redux';
 
-import { themeConfig } from '@/constants/styles';
-import { ITheme } from '@/types/theme';
+import { themeConfig } from '../../constants/styles';
+import { ITheme } from '../../types/theme';
 
 const CPopup = ({
   show = false,

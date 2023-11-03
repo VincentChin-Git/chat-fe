@@ -1,14 +1,14 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useState } from 'react';
-import { View } from 'react-native';
+import { Text, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
-import userApi from '@/api/user';
-import { commonStyles, themeConfig } from '@/constants/styles';
-import { loginAction } from '@/store/sliceUser';
-import { ITheme } from '@/types/theme';
-import IUser from '@/types/user';
-import toast from '@/utils/toast';
+import userApi from '../../api/user';
+import { commonStyles, themeConfig } from '../../constants/styles';
+import { loginAction } from '../../store/sliceUser';
+import { ITheme } from '../../types/theme';
+import IUser from '../../types/user';
+import toast from '../../utils/toast';
 
 const Login = ({ navigation }: any) => {
   const [form, setForm] = useState({
@@ -22,7 +22,7 @@ const Login = ({ navigation }: any) => {
     passwordErr: false,
   });
   const dispatch = useDispatch();
-  const theme = useSelector((state: any) => state.user as ITheme);
+  const theme = useSelector((state: any) => state.theme as ITheme);
 
   const handleLogin = async () => {
     if (control.isBlock) return;
@@ -58,8 +58,10 @@ const Login = ({ navigation }: any) => {
     <View
       style={{
         ...commonStyles.pageStyles,
-        backgroundColor: themeConfig[theme.theme].bgColor,
-      }}></View>
+        backgroundColor: themeConfig[theme.theme]?.bgColor,
+      }}>
+      <Text>123</Text>
+    </View>
   );
 };
 

@@ -2,8 +2,8 @@ import React from 'react';
 import { Modal, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useSelector } from 'react-redux';
 
-import { themeConfig } from '@/constants/styles';
-import { ITheme } from '@/types/theme';
+import { themeConfig } from '../../constants/styles';
+import { ITheme } from '../../types/theme';
 
 const CModal = ({
   show = false,

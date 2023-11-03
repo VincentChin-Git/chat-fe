@@ -3,8 +3,8 @@ import React from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { useSelector } from 'react-redux';
 
-import { themeConfig } from '@/constants/styles';
-import { ITheme } from '@/types/theme';
+import { themeConfig } from '../../constants/styles';
+import { ITheme } from '../../types/theme';
 
 const Footer = ({
   navigation,

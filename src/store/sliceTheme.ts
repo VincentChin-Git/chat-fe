@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createSlice } from '@reduxjs/toolkit';
 
-import { IThemeOption } from '@/types/theme';
+import { IThemeOption } from '../types/theme';
 
 const initialState = { themeColor: '#ff4262', theme: IThemeOption.LIGHT };
 

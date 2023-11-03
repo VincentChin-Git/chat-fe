@@ -3,8 +3,7 @@ import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 
 import CPopup from './CPopup';
-
-import { commonStyles } from '@/constants/styles';
+import { commonStyles } from '../../constants/styles';
 
 const CPopupBottom = ({
   show,

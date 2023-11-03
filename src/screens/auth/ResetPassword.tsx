@@ -2,14 +2,14 @@ import { useState } from 'react';
 import { View } from 'react-native';
 import { useSelector } from 'react-redux';
 
-import userApi from '@/api/user';
-import Footer from '@/components/common/Footer';
-import Header from '@/components/common/Header';
-import { commonStyles, themeConfig } from '@/constants/styles';
-import useControl from '@/hooks/useControl';
-import { ITheme } from '@/types/theme';
-import IUser from '@/types/user';
-import toast from '@/utils/toast';
+import userApi from '../../api/user';
+import Footer from '../../components/common/Footer';
+import Header from '../../components/common/Header';
+import { commonStyles, themeConfig } from '../../constants/styles';
+import useControl from '../../hooks/useControl';
+import { ITheme } from '../../types/theme';
+import IUser from '../../types/user';
+import toast from '../../utils/toast';
 
 const ResetPassword = ({ navigation, route }: any) => {
   const user = useSelector((state: any) => state.user as IUser);

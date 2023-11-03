@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createSlice } from '@reduxjs/toolkit';
 
-import IUser from '@/types/user';
+import IUser from '../types/user';
 
 const initialState = {
   _id: undefined,

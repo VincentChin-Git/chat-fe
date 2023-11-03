@@ -4,19 +4,19 @@ import React from 'react';
 import { PaperProvider } from 'react-native-paper';
 import { Provider } from 'react-redux';
 
-import ForgetPassword from '@/screens/auth/ForgetPassword';
-import Login from '@/screens/auth/Login';
-import Signup from '@/screens/auth/Signup';
-import Chat from '@/screens/chat/Chat';
-import Contact from '@/screens/contact/Contact';
-import Contacts from '@/screens/contact/Contacts';
-import NewContact from '@/screens/contact/NewContact';
-import SearchContact from '@/screens/contact/SearchContact';
-import Home from '@/screens/index/Home';
-import Index from '@/screens/index/Index';
-import Setting from '@/screens/setting/Setting';
-import SettingDetail from '@/screens/setting/SettingDetail';
-import appStore from '@/store/store';
+import ForgetPassword from './src/screens/auth/ForgetPassword';
+import Login from './src/screens/auth/Login';
+import Signup from './src/screens/auth/Signup';
+import Chat from './src/screens/chat/Chat';
+import Contact from './src/screens/contact/Contact';
+import Contacts from './src/screens/contact/Contacts';
+import NewContact from './src/screens/contact/NewContact';
+import SearchContact from './src/screens/contact/SearchContact';
+import Home from './src/screens/index/Home';
+import Index from './src/screens/index/Index';
+import Setting from './src/screens/setting/Setting';
+import SettingDetail from './src/screens/setting/SettingDetail';
+import appStore from './src/store/store';
 
 const Stack = createNativeStackNavigator();
 

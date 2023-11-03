@@ -2,8 +2,7 @@ import * as ImagePicker from 'expo-image-picker';
 
 // import { uploadFiles, getFiles } from '@/services/storage';
 import toast from './toast';
-
-import uriToBlob from '@/utils/uriToBlob';
+import uriToBlob from '../utils/uriToBlob';
 
 const selectMedia = async ({
   options = {},

@@ -1,8 +1,8 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
-import { IHttpData, IHttpErrorData } from '@/types/request';
-import toast from '@/utils/toast';
+import { IHttpData, IHttpErrorData } from '../types/request';
+import toast from '../utils/toast';
 
 const baseUrl = process.env.SERVER_BASE_URL;
 

@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-import { IThemeOption } from '@/types/theme';
+import { IThemeOption } from '../types/theme';
 
 export const themeConfig = {
   [IThemeOption.DARK]: {

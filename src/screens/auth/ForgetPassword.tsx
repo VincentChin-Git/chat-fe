@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { View } from 'react-native';
 
-import userApi from '@/api/user';
-import useControl from '@/hooks/useControl';
-import toast from '@/utils/toast';
+import userApi from '../../api/user';
+import useControl from '../../hooks/useControl';
+import toast from '../../utils/toast';
 
 const ForgetPassword = ({ navigation }: any) => {
   const [form, setForm] = useState({ mobile: '', code: '', userId: '' });

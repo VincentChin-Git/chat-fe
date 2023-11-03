@@ -2,11 +2,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
-import userApi from '@/api/user';
-import Loading from '@/components/common/Loading';
-import { setThemeAction, setThemeColorAction } from '@/store/sliceTheme';
-import { loginAction } from '@/store/sliceUser';
-import IUser from '@/types/user';
+import userApi from '../../api/user';
+import Loading from '../../components/common/Loading';
+import { setThemeAction, setThemeColorAction } from '../../store/sliceTheme';
+import { loginAction } from '../../store/sliceUser';
+import IUser from '../../types/user';
 
 const Index = ({ navigation }: any) => {
   const dispatch = useDispatch();
