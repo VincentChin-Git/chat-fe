@@ -33,8 +33,8 @@ const Index = ({ navigation }: any) => {
       // no userInfo
       else handleNoLogin();
     } catch (error) {
-      await AsyncStorage.removeItem('userAuthToken');
-      handleNoLogin();
+      // await AsyncStorage.removeItem('userAuthToken');
+      // handleNoLogin();
       console.error(error, 'errGetUserInfo');
     }
   };

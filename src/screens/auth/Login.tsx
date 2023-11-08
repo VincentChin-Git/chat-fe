@@ -5,7 +5,9 @@ import { TextInput } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 
 import userApi from '../../api/user';
+import CButton from '../../components/common/CButton';
 import CTextInput from '../../components/common/CTextInput';
+import Loading from '../../components/common/Loading';
 import StatusHeader from '../../components/common/StatusHeader';
 import { commonStyles, themeConfig } from '../../constants/styles';
 import { loginAction } from '../../store/sliceUser';
@@ -63,6 +65,7 @@ const Login = ({ navigation }: any) => {
 
   return (
     <>
+      {control.isBlock && <Loading />}
       <StatusHeader bgColor={themeStyles?.bgColor} />
       <View
         style={{
@@ -124,18 +127,7 @@ const Login = ({ navigation }: any) => {
         </Text>
 
         {/* login  */}
-        <Text
-          onPress={handleLogin}
-          style={{
-            backgroundColor: theme.themeColor,
-            color: invertColor(theme.themeColor),
-            paddingVertical: 15,
-            borderRadius: 5,
-            textAlign: 'center',
-            marginBottom: 30,
-          }}>
-          Login
-        </Text>
+        <CButton handlePress={handleLogin} text="Login" margin={0} />
 
         {/* sign up */}
         <View

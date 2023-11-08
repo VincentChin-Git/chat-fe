@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 
 import { IHttpData, IHttpErrorData } from '../types/request';
 import toast from '../utils/toast';
@@ -24,11 +24,15 @@ const getRequest = async (url: string, params: any) => {
       ).data;
       console.log(res, url);
       if (res.success) resolve(res.data);
-      else reject(new Error('Please try again later'));
+      else {
+        toast('Please try again later');
+        reject(new Error('Please try again later'));
+      }
     } catch (error) {
-      const err = error as IHttpErrorData;
-      if (!err || !err.errMessage) return;
-      console.log(err.errMessage, url);
+      const errParse = error as AxiosError;
+      const err = errParse.response?.data as IHttpErrorData;
+      console.log(err, url);
+      if (!err || !err.errMessage) return reject(new Error(''));
       toast(err.errMessage);
       reject(new Error(err.errMessage));
     }
@@ -50,11 +54,15 @@ const postRequest = async (url: string, data: any) => {
       ).data;
       console.log(res, url);
       if (res.success) resolve(res.data);
-      else reject(new Error('Please try again later'));
+      else {
+        toast('Please try again later');
+        reject(new Error('Please try again later'));
+      }
     } catch (error) {
-      const err = error as IHttpErrorData;
-      if (!err || !err.errMessage) return;
-      console.log(err.errMessage, url);
+      const errParse = error as AxiosError;
+      const err = errParse.response?.data as IHttpErrorData;
+      console.log(err, url);
+      if (!err || !err.errMessage) return reject(new Error(''));
       toast(err.errMessage);
       reject(new Error(err.errMessage));
     }
