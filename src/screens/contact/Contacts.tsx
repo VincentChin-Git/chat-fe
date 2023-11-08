@@ -28,7 +28,7 @@ const Contacts = ({ navigation }: { navigation: any }) => {
         pageSize: control.pageSize,
       })) as any as IContactPopulate[] | undefined;
 
-      setData(res || []);
+      if (res?.length) setData(res);
       setControl(prev => ({
         ...prev,
         isEnd: !res || res?.length < prev.pageSize!,

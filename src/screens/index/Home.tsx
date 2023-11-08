@@ -26,6 +26,7 @@ import { IChatOverview, IChatUnread } from '../../types/chat';
 import { IContactPopulate } from '../../types/contact';
 import { ITheme } from '../../types/theme';
 import IUser from '../../types/user';
+import isCloseToBottom from '../../utils/isCloseToBottom';
 
 const Home = ({ navigation }: { navigation: any }) => {
   const user = useSelector((state: any) => state.user as IUser);
@@ -62,7 +63,7 @@ const Home = ({ navigation }: { navigation: any }) => {
         pageSize: controlChat.pageSize,
       })) as IChatOverview[];
 
-      setDataChat(resChat || []);
+      if (resChat?.length) setDataChat(resChat);
       console.log(resChat, 'resChat');
 
       setControlChat(prev => ({
@@ -96,7 +97,7 @@ const Home = ({ navigation }: { navigation: any }) => {
         pageSize: controlCon.pageSize,
       })) as IContactPopulate[];
 
-      setDataCon(resCon || []);
+      if (resCon?.length) setDataCon(resCon);
       console.log(resCon, 'resCon');
 
       setControlCon(prev => ({
@@ -213,7 +214,11 @@ const Home = ({ navigation }: { navigation: any }) => {
                   display: 'flex',
                   flexDirection: 'row',
                 }}
-                horizontal>
+                horizontal
+                onScroll={({ nativeEvent }) => {
+                  if (isCloseToBottom(nativeEvent)) getInfoCon();
+                }}
+                scrollEventThrottle={400}>
                 {dataCon.map((item, index) => (
                   <View
                     key={item._id}
