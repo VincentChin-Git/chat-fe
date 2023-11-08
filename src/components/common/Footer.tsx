@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 
 import { themeConfig } from '../../constants/styles';
 import { ITheme } from '../../types/theme';
+import invertColor from '../../utils/invertColor';
 
 const Footer = ({
   navigation,
@@ -30,12 +31,13 @@ const Footer = ({
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-around',
-        height: 40,
+        height: 50,
         minHeight: 40,
         width: '100%',
-        flex: 1,
-        alignItems: 'flex-end',
-        marginBottom: 15,
+        alignItems: 'center',
+        paddingBottom: 15,
+        paddingTop: 15,
+        backgroundColor: theme.themeColor,
       }}>
       {routes.map(({ Icon, to }, index) => (
         <TouchableOpacity
@@ -47,7 +49,7 @@ const Footer = ({
           <Icon
             size={28}
             weight={selected === index ? 'fill' : 'regular'}
-            color={themeConfig[theme.theme].contrast}
+            color={invertColor(theme.themeColor)}
           />
         </TouchableOpacity>
       ))}

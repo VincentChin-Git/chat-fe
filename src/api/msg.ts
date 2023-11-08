@@ -10,6 +10,10 @@ const getOverviewMsg = async (payload: any) => {
   return request.get(prefix + '/getOverviewMsg', payload);
 };
 
+const getUnreadMsg = async () => {
+  return request.get(prefix + '/getUnreadMsg', {});
+};
+
 const sendMsg = async (payload: any) => {
   return request.post(prefix + '/sendMsg', payload);
 };
@@ -23,6 +27,7 @@ const msgApi = {
   updateMsgStatus,
   sendMsg,
   getOverviewMsg,
+  getUnreadMsg,
 };
 
 export default msgApi;
