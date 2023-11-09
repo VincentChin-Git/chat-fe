@@ -19,9 +19,9 @@ const ContactCard = ({
         alignItems: 'center',
         columnGap: 15,
       }}>
-      <ProfileImage avatar={contactInfo.avatar} />
+      <ProfileImage avatar={contactInfo.avatar} dim={50} />
       <View>
-        <Text style={{ fontWeight: '500', fontSize: 14 }}>
+        <Text style={{ fontWeight: '500', fontSize: 16 }}>
           {contactInfo.nickname}
         </Text>
         {contactInfo.describe && (

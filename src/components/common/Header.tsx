@@ -32,7 +32,7 @@ const Header = ({
       <View style={{ width: '25%' }}>
         {showBack && (
           <TouchableOpacity onPress={() => navigation.goBack()}>
-            <ArrowLeft size={28} />
+            <ArrowLeft size={28} color={theme.themeColor} />
           </TouchableOpacity>
         )}
 
