@@ -98,7 +98,7 @@ const Home = ({ navigation }: { navigation: any }) => {
       })) as IContactPopulate[];
 
       if (resCon?.length) setDataCon(resCon);
-      console.log(resCon, 'resCon');
+      console.log(resCon?.length, 'resCon');
 
       setControlCon(prev => ({
         ...prev,

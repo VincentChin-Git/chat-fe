@@ -2,14 +2,17 @@ import * as ImagePicker from 'expo-image-picker';
 
 // import { uploadFiles, getFiles } from '@/services/storage';
 import toast from './toast';
+import awsApi from '../api/aws';
 import uriToBlob from '../utils/uriToBlob';
 
 const selectMedia = async ({
   options = {},
   filename = '',
+  folderName = '',
 }: {
   options: ImagePicker.ImagePickerOptions;
   filename: string;
+  folderName?: string;
 }) => {
   // check if canceled -> get fileList -> validate fileList -> upload all -> return fileList
 
@@ -50,7 +53,6 @@ const selectMedia = async ({
       }
       // end validate
 
-      // TODO: upload file
       // upload image
       const extensionRegex = new RegExp('[^.]+$');
 
@@ -61,10 +63,15 @@ const selectMedia = async ({
         const metadata = {
           contentType: `${file.type}/${extension}`,
         };
-        const toBlob = (await uriToBlob(file.uri)) as Blob;
-        const fullPath = `${filename}_${index + 1}.${extension}`;
+        const toBlob = (await uriToBlob(file.uri)) as any;
+        const fullPath = `${folderName}${filename}_${index + 1}.${extension}`;
 
-        fileList.push({ ...file });
+        const resSign = (await awsApi.uploadImgSignature({
+          filename: fullPath,
+        })) as any as { uploadUrl: string; viewUrl: string };
+
+        const resUpload = await awsApi.directUpload(resSign.uploadUrl, toBlob);
+        if (resUpload) fileList.push({ ...file, uri: resSign.viewUrl });
       }
       // end upload image
 

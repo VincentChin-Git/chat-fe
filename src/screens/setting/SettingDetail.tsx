@@ -13,6 +13,7 @@ import { ITheme } from '../../types/theme';
 import IUser from '../../types/user';
 import toast from '../../utils/toast';
 
+// setting for nickname, avatar, describe
 const SettingDetail = ({
   navigation,
   route,

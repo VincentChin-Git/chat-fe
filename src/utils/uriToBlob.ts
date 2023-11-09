@@ -1,21 +1,13 @@
-const uriToBlob = (uri: string) => {
-  return new Promise((resolve, reject) => {
-    const xhr = new XMLHttpRequest();
-    xhr.onload = function () {
-      // return the blob
-      resolve(xhr.response);
-    };
-
-    xhr.onerror = function () {
-      // something went wrong
-      reject(new Error('uriToBlob failed'));
-    };
-    // this helps us get a blob
-    xhr.responseType = 'blob';
-    xhr.open('GET', uri, true);
-
-    xhr.send(null);
+const uriToBlob = async (uri: string) => {
+  const response = await fetch(uri);
+  const blob = await response.blob();
+  const binaryData = await new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = reject;
+    reader.readAsArrayBuffer(blob);
   });
+  return binaryData;
 };
 
 export default uriToBlob;

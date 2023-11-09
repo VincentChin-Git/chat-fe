@@ -72,7 +72,9 @@ const postRequest = async (url: string, data: any) => {
 const putRequest = async (url: string, data: any) => {
   return new Promise(async (resolve, reject) => {
     try {
-      const res = await axios.put(url, data);
+      const res = await axios.put(url, data, {
+        headers: { 'Content-Type': 'application/octet-stream' },
+      });
       if (res.status === 200) resolve(true);
       else {
         console.log('upload failed', res);

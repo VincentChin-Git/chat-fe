@@ -13,7 +13,7 @@ const CButton = ({
   text: string;
   margin?: number;
 }) => {
-  const _margin = margin || 15;
+  const _margin = !margin && margin !== 0 ? 15 : margin;
   const theme = useSelector((state: any) => state.theme as ITheme);
 
   return (
