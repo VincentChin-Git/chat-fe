@@ -22,12 +22,17 @@ const updateMsgStatus = async (payload: any) => {
   return request.post(prefix + '/updateMsgStatus', payload);
 };
 
+const updateMsgToReceived = async () => {
+  return request.post(prefix + '/updateMsgToReceived', {});
+};
+
 const msgApi = {
   getMsgs,
   updateMsgStatus,
   sendMsg,
   getOverviewMsg,
   getUnreadMsg,
+  updateMsgToReceived,
 };
 
 export default msgApi;

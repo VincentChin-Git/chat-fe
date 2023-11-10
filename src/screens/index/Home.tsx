@@ -1,14 +1,6 @@
 import { useIsFocused } from '@react-navigation/native';
-import { Plus } from 'phosphor-react-native';
 import { useEffect } from 'react';
-import {
-  Image,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import contactApi from '../../api/contact';
@@ -17,8 +9,9 @@ import Footer from '../../components/common/Footer';
 import Loading from '../../components/common/Loading';
 import StatusHeader from '../../components/common/StatusHeader';
 import ProfileImage from '../../components/contact/ProfileImage';
+import AddContactBtn from '../../components/index/AddContactBtn';
 import appConfig from '../../constants/config';
-import { commonStyles, themeConfig } from '../../constants/styles';
+import { commonStyles } from '../../constants/styles';
 import useControl from '../../hooks/useControl';
 import useData from '../../hooks/useData';
 import { addUnreadAction } from '../../store/sliceUnreadMsg';
@@ -43,7 +36,10 @@ const Home = ({ navigation }: { navigation: any }) => {
   const getInfoUnread = async () => {
     try {
       const resUnread = (await msgApi.getUnreadMsg()) as any as IChatUnread[];
-      if (resUnread.length > 0) dispatch(addUnreadAction(resUnread));
+      if (resUnread.length > 0) {
+        dispatch(addUnreadAction(resUnread));
+        msgApi.updateMsgToReceived();
+      }
     } catch (error) {
       console.error(error, 'errGetUnread');
     }
@@ -195,18 +191,7 @@ const Home = ({ navigation }: { navigation: any }) => {
                 alignItems: 'center',
                 marginVertical: 15,
               }}>
-              <TouchableOpacity
-                style={{
-                  marginLeft: 15,
-                  display: 'flex',
-                  flexDirection: 'row',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  ...styles.contact,
-                }}
-                onPress={() => navigation.navigate('NewContact')}>
-                <Plus color={theme.themeColor} size={28} weight="bold" />
-              </TouchableOpacity>
+              <AddContactBtn navigation={navigation} />
               <ScrollView
                 showsHorizontalScrollIndicator={false}
                 showsVerticalScrollIndicator={false}
@@ -230,7 +215,10 @@ const Home = ({ navigation }: { navigation: any }) => {
                       avatar={item?.avatar}
                       dim={40}
                       handlePress={() => {
-                        navigation.navigate('Contact', { contactId: item._id });
+                        navigation.navigate('Chat', {
+                          contactId: item._id,
+                          contactInfo: item,
+                        });
                       }}
                     />
                   </View>
@@ -245,14 +233,5 @@ const Home = ({ navigation }: { navigation: any }) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  contact: {
-    height: 48,
-    width: 48,
-    backgroundColor: '#ddd',
-    borderRadius: 9999,
-  },
-});
 
 export default Home;

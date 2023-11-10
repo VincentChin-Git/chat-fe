@@ -1,4 +1,4 @@
-import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Image, StyleSheet, TouchableOpacity } from 'react-native';
 
 import BlankProfile from '../../assets/default/BlankProfile.png';
 
@@ -19,19 +19,12 @@ const ProfileImage = ({
   );
 
   return (
-    <>
-      {handlePress && (
-        <TouchableOpacity onPress={handlePress} style={styles.container}>
-          <ImageChild />
-        </TouchableOpacity>
-      )}
-
-      {!handlePress && (
-        <View style={styles.container}>
-          <ImageChild />
-        </View>
-      )}
-    </>
+    <TouchableOpacity
+      onPress={handlePress}
+      style={styles.container}
+      disabled={!handlePress}>
+      <ImageChild />
+    </TouchableOpacity>
   );
 };
 

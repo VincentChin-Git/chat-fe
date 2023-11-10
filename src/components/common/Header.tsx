@@ -7,12 +7,14 @@ import { ITheme } from '../../types/theme';
 const Header = ({
   navigation,
   title,
+  mode = 'center',
   showBack = false,
   LeftChild = () => <></>,
   RightChild = () => <></>,
 }: {
   navigation: any;
   title: string;
+  mode?: string;
   showBack?: boolean;
   LeftChild?: (props: any) => React.JSX.Element;
   RightChild?: (props: any) => React.JSX.Element;
@@ -29,30 +31,38 @@ const Header = ({
         marginHorizontal: 15,
       }}>
       {/* left */}
-      <View style={{ width: '25%' }}>
+      <View
+        style={{
+          width: mode === 'center' ? '25%' : '50%',
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+        }}>
         {showBack && (
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <ArrowLeft size={28} color={theme.themeColor} />
           </TouchableOpacity>
         )}
 
-        {!showBack && <LeftChild />}
+        {LeftChild && <LeftChild />}
       </View>
 
       {/* middle */}
-      <Text
-        style={{
-          width: '50%',
-          textAlign: 'center',
-          fontWeight: '700',
-          fontSize: 20,
-          color: theme.themeColor,
-        }}>
-        {title}
-      </Text>
+      {mode === 'center' && (
+        <Text
+          style={{
+            width: '50%',
+            textAlign: 'center',
+            fontWeight: '700',
+            fontSize: 20,
+            color: theme.themeColor,
+          }}>
+          {title}
+        </Text>
+      )}
 
       {/* right */}
-      <View style={{ width: '25%' }}>
+      <View style={{ width: mode === 'center' ? '25%' : '50%' }}>
         <RightChild />
       </View>
     </View>
