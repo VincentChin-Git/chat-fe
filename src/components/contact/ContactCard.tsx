@@ -12,7 +12,12 @@ const ContactCard = ({
 }) => {
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate('', {})}
+      onPress={() =>
+        navigation.navigate('Chat', {
+          contactId: contactInfo._id,
+          contactInfo,
+        })
+      }
       style={{
         display: 'flex',
         flexDirection: 'row',

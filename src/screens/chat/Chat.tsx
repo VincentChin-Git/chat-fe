@@ -68,7 +68,6 @@ const Chat = ({ navigation, route }: { navigation: any; route: any }) => {
   const unread = useSelector(
     (state: any) => state.unread as { unread: IChatUnread[] },
   );
-  console.log(unread, 'unread');
 
   const { params } = route;
   const {
@@ -81,7 +80,7 @@ const Chat = ({ navigation, route }: { navigation: any; route: any }) => {
   }
   const unreadThis = unread.unread.find(item => item.contactId === contactId);
 
-  const { control, setControl } = useControl();
+  const { control, setControl } = useControl({ pageSize: 30 });
   const [data, setData] = useState<IChat[]>([]);
   const [typeMsg, setTypeMsg] = useState('');
   const [inputHeight, setInputHeight] = useState(40);
@@ -167,7 +166,6 @@ const Chat = ({ navigation, route }: { navigation: any; route: any }) => {
     console.log(e.nativeEvent, 'event');
     const height =
       Math.round((e?.nativeEvent?.contentSize?.height || 40) / 20) * 20;
-    console.log(height, 'height');
     setInputHeight(height < 100 ? height : 100);
   };
 
@@ -225,6 +223,7 @@ const Chat = ({ navigation, route }: { navigation: any; route: any }) => {
         style={{
           display: 'flex',
           flexDirection: 'column-reverse',
+          marginBottom: 10,
         }}
         onScroll={({ nativeEvent }) => {
           if (isCloseToBottom(nativeEvent)) getInfo();
@@ -238,6 +237,8 @@ const Chat = ({ navigation, route }: { navigation: any; route: any }) => {
               item.senderId === contactId ? contactInfo.avatar : user.avatar
             }
             isSelf={item.senderId === user._id}
+            status={item.status || 'sending'}
+            createdAt={item.createdAt || undefined}
           />
         ))}
       </ScrollView>

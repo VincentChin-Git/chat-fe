@@ -114,6 +114,7 @@ const Home = ({ navigation }: { navigation: any }) => {
   };
 
   useEffect(() => {
+    getInfoUnread();
     const track = setInterval(() => {
       getInfoUnread();
     }, 15000);
