@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { Checks } from 'phosphor-react-native';
+import { Check, Checks } from 'phosphor-react-native';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -75,7 +75,7 @@ const ChatCard = ({
             <Checks color={'#ccc'} size={20} />
           )}
           {contactInfo._id !== user._id && msg.status === 'sent' && (
-            <Checks color={'#ccc'} size={20} />
+            <Check color={'#ccc'} size={20} />
           )}
           <Text style={{ fontSize: 14 }}>{msg.content}</Text>
           <View style={{ flex: 1 }} />

@@ -15,6 +15,7 @@ import appConfig from '../../constants/config';
 import { commonStyles } from '../../constants/styles';
 import useControl from '../../hooks/useControl';
 import useData from '../../hooks/useData';
+import useMsgData from '../../hooks/useMsgData';
 import { addUnreadAction } from '../../store/sliceUnreadMsg';
 import { IChatOverview, IChatUnread } from '../../types/chat';
 import { IContactPopulate } from '../../types/contact';
@@ -31,7 +32,8 @@ const Home = ({ navigation }: { navigation: any }) => {
 
   const { control: controlChat, setControl: setControlChat } = useControl();
   const { control: controlCon, setControl: setControlCon } = useControl();
-  const { data: dataChat, setData: setDataChat } = useData<IChatOverview>([]);
+  const { msgData: dataChat, setMsgData: setDataChat } =
+    useMsgData<IChatOverview>([]);
   const { data: dataCon, setData: setDataCon } = useData<IContactPopulate>([]);
 
   const getInfoUnread = async () => {
@@ -60,7 +62,11 @@ const Home = ({ navigation }: { navigation: any }) => {
         pageSize: controlChat.pageSize,
       })) as IChatOverview[];
 
-      if (resChat?.length) setDataChat(resChat);
+      if (resChat?.length) {
+        setDataChat(
+          resChat.map(item => ({ ...item, _id: item.contactData._id })),
+        );
+      }
       console.log(resChat, 'resChat');
 
       setControlChat(prev => ({
