@@ -1,5 +1,5 @@
 import { Camera } from 'phosphor-react-native';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { TouchableOpacity, View, Text } from 'react-native';
 import ColorPicker from 'react-native-wheel-color-picker';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,7 +13,7 @@ import Loading from '../../components/common/Loading';
 import StatusHeader from '../../components/common/StatusHeader';
 import ProfileImage from '../../components/contact/ProfileImage';
 import ProfileCellInfo from '../../components/setting/ProfileCellInfo';
-import { commonStyles, themeConfig } from '../../constants/styles';
+import { commonStyles } from '../../constants/styles';
 import useControl from '../../hooks/useControl';
 import { setThemeColorAction } from '../../store/sliceTheme';
 import { changeUserInfoAction, logoutAction } from '../../store/sliceUser';
@@ -145,7 +145,6 @@ const Setting = ({ navigation }: { navigation: any }) => {
     <View
       style={{
         ...commonStyles.pageStyles,
-        backgroundColor: themeConfig[theme.theme].bgColor,
       }}>
       <StatusHeader
         bgColor={control.isConfirm ? 'rgba(0,0,0,0.3)' : undefined}

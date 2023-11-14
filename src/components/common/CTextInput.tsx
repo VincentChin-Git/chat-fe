@@ -32,7 +32,7 @@ const CTextInput = ({
         activeOutlineColor={themeStyles.textColor}
         mode="outlined"
         outlineStyle={{ borderWidth: 1 }}
-        style={{ marginBottom: 5 }}
+        style={{ marginBottom: 5, height: 45 }}
         {...props}
       />
       <View

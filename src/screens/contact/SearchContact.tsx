@@ -5,7 +5,7 @@ import contactApi from '../../api/contact';
 import Footer from '../../components/common/Footer';
 import Header from '../../components/common/Header';
 import StatusHeader from '../../components/common/StatusHeader';
-import { commonStyles, themeConfig } from '../../constants/styles';
+import { commonStyles } from '../../constants/styles';
 import useControl from '../../hooks/useControl';
 import useData from '../../hooks/useData';
 import { IContactPopulate } from '../../types/contact';
@@ -51,7 +51,6 @@ const SearchContact = ({ navigation }: { navigation: any }) => {
     <View
       style={{
         ...commonStyles.pageStyles,
-        backgroundColor: themeConfig[theme.theme].bgColor,
       }}>
       <StatusHeader />
       <Header navigation={navigation} title="" />

@@ -9,7 +9,7 @@ import CButton from '../../components/common/CButton';
 import CTextInput from '../../components/common/CTextInput';
 import Loading from '../../components/common/Loading';
 import StatusHeader from '../../components/common/StatusHeader';
-import { commonStyles, themeConfig } from '../../constants/styles';
+import { commonStyles } from '../../constants/styles';
 import { loginAction } from '../../store/sliceUser';
 import { IInputStatus } from '../../types/common';
 import { ITheme } from '../../types/theme';
@@ -30,7 +30,6 @@ const Login = ({ navigation }: any) => {
   });
   const dispatch = useDispatch();
   const theme = useSelector((state: any) => state.theme as ITheme);
-  const themeStyles = themeConfig[theme.theme];
 
   const handleLogin = async () => {
     if (control.isBlock) return;
@@ -65,17 +64,16 @@ const Login = ({ navigation }: any) => {
   return (
     <>
       {control.isBlock && <Loading />}
-      <StatusHeader bgColor={themeStyles?.bgColor} />
+      <StatusHeader />
       <View
         style={{
           ...commonStyles.pageStyles,
-          backgroundColor: themeStyles?.bgColor,
           justifyContent: 'center',
           paddingHorizontal: 15,
         }}>
         <Text
           style={{
-            color: themeStyles.textColor,
+            color: theme.themeColor,
             fontSize: 28,
             marginBottom: 40,
             textAlign: 'center',

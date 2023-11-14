@@ -10,7 +10,7 @@ import CTextInput from '../../components/common/CTextInput';
 import Header from '../../components/common/Header';
 import Loading from '../../components/common/Loading';
 import StatusHeader from '../../components/common/StatusHeader';
-import { commonStyles, themeConfig } from '../../constants/styles';
+import { commonStyles } from '../../constants/styles';
 import { loginAction } from '../../store/sliceUser';
 import { IInputStatus } from '../../types/common';
 import { ITheme } from '../../types/theme';
@@ -38,7 +38,6 @@ const Signup = ({ navigation }: any) => {
   });
   const dispatch = useDispatch();
   const theme = useSelector((state: any) => state.theme as ITheme);
-  const themeStyles = themeConfig[theme.theme];
 
   const handleSignup = async () => {
     if (control.isBlock) return;
@@ -148,12 +147,11 @@ const Signup = ({ navigation }: any) => {
 
   return (
     <>
-      <StatusHeader bgColor={themeStyles?.bgColor} />
+      <StatusHeader />
       {control.isBlock && <Loading />}
       <View
         style={{
           ...commonStyles.pageStyles,
-          backgroundColor: themeStyles?.bgColor,
           justifyContent: 'center',
           paddingHorizontal: 15,
         }}>
@@ -163,7 +161,7 @@ const Signup = ({ navigation }: any) => {
         </View>
         <Text
           style={{
-            color: themeStyles.textColor,
+            color: theme.themeColor,
             fontSize: 28,
             marginBottom: 40,
             textAlign: 'center',

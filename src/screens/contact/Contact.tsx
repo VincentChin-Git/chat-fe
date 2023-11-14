@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import Footer from '../../components/common/Footer';
 import Header from '../../components/common/Header';
 import StatusHeader from '../../components/common/StatusHeader';
-import { commonStyles, themeConfig } from '../../constants/styles';
+import { commonStyles } from '../../constants/styles';
 import { IContactPopulate } from '../../types/contact';
 import { ITheme } from '../../types/theme';
 import toast from '../../utils/toast';
@@ -25,7 +25,6 @@ const Contact = ({ navigation, route }: { navigation: any; route: any }) => {
     <View
       style={{
         ...commonStyles.pageStyles,
-        backgroundColor: themeConfig[theme.theme].bgColor,
       }}>
       <StatusHeader />
       <Header

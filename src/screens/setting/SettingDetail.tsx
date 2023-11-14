@@ -8,11 +8,10 @@ import CModal from '../../components/common/CModal';
 import CTextInput from '../../components/common/CTextInput';
 import Header from '../../components/common/Header';
 import StatusHeader from '../../components/common/StatusHeader';
-import { commonStyles, themeConfig } from '../../constants/styles';
+import { commonStyles } from '../../constants/styles';
 import useControl from '../../hooks/useControl';
 import { changeUserInfoAction } from '../../store/sliceUser';
 import { IInputStatus } from '../../types/common';
-import { ITheme } from '../../types/theme';
 import IUser from '../../types/user';
 import toast from '../../utils/toast';
 
@@ -25,7 +24,6 @@ const SettingDetail = ({
   route: any;
 }) => {
   const user = useSelector((state: any) => state.user as IUser);
-  const theme = useSelector((state: any) => state.theme as ITheme);
   const dispatch = useDispatch();
   const { params } = route;
   const { label = '' } = params as { label: string };
@@ -58,7 +56,6 @@ const SettingDetail = ({
     <View
       style={{
         ...commonStyles.pageStyles,
-        backgroundColor: themeConfig[theme.theme].bgColor,
       }}>
       <StatusHeader />
       <Header navigation={navigation} title={headerTitle} showBack />
