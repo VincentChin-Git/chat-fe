@@ -1,6 +1,10 @@
 import { View, ActivityIndicator, StatusBar } from 'react-native';
+import { useSelector } from 'react-redux';
+
+import { ITheme } from '../../types/theme';
 
 const Loading = ({ mode = 'center' }) => {
+  const theme = useSelector((state: any) => state.theme as ITheme);
   return (
     <>
       {mode === 'center' && (
@@ -17,7 +21,7 @@ const Loading = ({ mode = 'center' }) => {
             backgroundColor: '#000',
           }}>
           <View style={{ paddingTop: StatusBar.currentHeight }} />
-          <ActivityIndicator size="large" />
+          <ActivityIndicator size="large" color={theme.themeColor} />
         </View>
       )}
 

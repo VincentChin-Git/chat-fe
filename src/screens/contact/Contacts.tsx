@@ -8,12 +8,11 @@ import Footer from '../../components/common/Footer';
 import Header from '../../components/common/Header';
 import StatusHeader from '../../components/common/StatusHeader';
 import ContactCard from '../../components/contact/ContactCard';
-import { commonStyles, themeConfig } from '../../constants/styles';
+import { commonStyles } from '../../constants/styles';
 import useControl from '../../hooks/useControl';
 import useData from '../../hooks/useData';
 import { IContactPopulate } from '../../types/contact';
 import { ITheme } from '../../types/theme';
-import IUser from '../../types/user';
 import isCloseToBottom from '../../utils/isCloseToBottom';
 
 const RightChild = ({ navigation }: any) => {
@@ -33,8 +32,6 @@ const RightChild = ({ navigation }: any) => {
 };
 
 const Contacts = ({ navigation }: { navigation: any }) => {
-  const user = useSelector((state: any) => state.user as IUser);
-  const theme = useSelector((state: any) => state.theme as ITheme);
   const { data, setData } = useData<IContactPopulate>([]);
   const { control, setControl } = useControl({ pageSize: 15 });
 

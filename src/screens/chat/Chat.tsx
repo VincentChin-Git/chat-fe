@@ -1,4 +1,4 @@
-import dayjs, { Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
 import { PaperPlaneRight } from 'phosphor-react-native';
 import { useEffect, useState } from 'react';
 import {

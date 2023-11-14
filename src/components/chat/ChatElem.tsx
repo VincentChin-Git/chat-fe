@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux';
 
 import BlankProfile from '../../assets/default/BlankProfile.png';
 import { ITheme } from '../../types/theme';
-import formatDate from '../../utils/formatDate';
 import invertColor from '../../utils/invertColor';
 
 const ChatElem = ({
@@ -60,17 +59,19 @@ const ChatElem = ({
           style={{
             alignSelf: 'flex-end',
             fontSize: 10,
-            color: '#ccc',
             marginRight: 3,
+            color: isSelf ? '#444' : '#ccc',
           }}>
           {dayjs(createdAt).format('HH:mm')}
         </Text>
-        <View style={{ alignSelf: 'flex-end' }}>
-          {status === 'sending' && <Clock size={12} color={'#ccc'} />}
-          {status === 'sent' && <Check size={12} color={'#ccc'} />}
-          {status === 'received' && <Checks size={12} color={'#ccc'} />}
-          {status === 'read' && <Checks size={12} color={textColor} />}
-        </View>
+        {isSelf && (
+          <View style={{ alignSelf: 'flex-end' }}>
+            {status === 'sending' && <Clock size={12} color={'#ccc'} />}
+            {status === 'sent' && <Check size={12} color={'#ccc'} />}
+            {status === 'received' && <Checks size={12} color={'#ccc'} />}
+            {status === 'read' && <Checks size={12} color={textColor} />}
+          </View>
+        )}
       </View>
       <Image
         source={profileImg ? { uri: profileImg } : BlankProfile}

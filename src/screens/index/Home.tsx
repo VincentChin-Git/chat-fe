@@ -1,10 +1,11 @@
 import { useIsFocused } from '@react-navigation/native';
 import { useEffect } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import contactApi from '../../api/contact';
 import msgApi from '../../api/msg';
+import ChatCard from '../../components/chat/ChatCard';
 import Footer from '../../components/common/Footer';
 import Loading from '../../components/common/Loading';
 import StatusHeader from '../../components/common/StatusHeader';
@@ -226,7 +227,33 @@ const Home = ({ navigation }: { navigation: any }) => {
                 ))}
               </ScrollView>
             </View>
+
+            {/* search bar */}
           </View>
+
+          {/* chat list */}
+          <ScrollView
+            showsHorizontalScrollIndicator={false}
+            showsVerticalScrollIndicator={false}
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              marginHorizontal: 15,
+              marginVertical: 10,
+            }}
+            onScroll={({ nativeEvent }) => {
+              if (isCloseToBottom(nativeEvent)) getInfoChat();
+            }}
+            scrollEventThrottle={400}>
+            {dataChat.map(item => (
+              <ChatCard
+                key={item?.contactData?._id || item?.msgData?._id}
+                contactInfo={item.contactData}
+                msg={item.msgData}
+                navigation={navigation}
+              />
+            ))}
+          </ScrollView>
         </View>
       </View>
       <Footer navigation={navigation} selected={0} />

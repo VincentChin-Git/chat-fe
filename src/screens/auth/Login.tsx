@@ -14,7 +14,6 @@ import { loginAction } from '../../store/sliceUser';
 import { IInputStatus } from '../../types/common';
 import { ITheme } from '../../types/theme';
 import IUser from '../../types/user';
-import invertColor from '../../utils/invertColor';
 import toast from '../../utils/toast';
 
 const Login = ({ navigation }: any) => {

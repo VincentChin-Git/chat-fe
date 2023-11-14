@@ -6,7 +6,6 @@ import userApi from '../../api/user';
 import CButton from '../../components/common/CButton';
 import CModal from '../../components/common/CModal';
 import CTextInput from '../../components/common/CTextInput';
-import Footer from '../../components/common/Footer';
 import Header from '../../components/common/Header';
 import StatusHeader from '../../components/common/StatusHeader';
 import { commonStyles, themeConfig } from '../../constants/styles';

@@ -60,9 +60,7 @@ const selectMedia = async ({
       for (let index = 0; index < tempFileList.length; index++) {
         const file = tempFileList[index];
         const extension = file.uri.match(extensionRegex);
-        const metadata = {
-          contentType: `${file.type}/${extension}`,
-        };
+
         const toBlob = (await uriToBlob(file.uri)) as any;
         const fullPath = `${folderName}${filename}_${index + 1}.${extension}`;
 

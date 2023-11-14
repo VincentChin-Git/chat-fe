@@ -1,8 +1,8 @@
 import IContact from './contact';
 
 export interface IChatOverview {
-  contactData: IChat;
-  msgData: IContact;
+  contactData: IContact;
+  msgData: IChat;
 }
 
 export interface IChatUnread {
