@@ -1,15 +1,18 @@
 import { useState } from 'react';
-import { Text, ToastAndroid, View } from 'react-native';
-import { Button, TextInput } from 'react-native-paper';
-import { useSelector } from 'react-redux';
+import { Text, View } from 'react-native';
+import { TextInput } from 'react-native-paper';
 
 import userApi from '../../api/user';
+import CButton from '../../components/common/CButton';
 import CModal from '../../components/common/CModal';
+import CTextInput from '../../components/common/CTextInput';
 import Header from '../../components/common/Header';
 import Loading from '../../components/common/Loading';
+import StatusHeader from '../../components/common/StatusHeader';
 import { commonStyles } from '../../constants/styles';
 import useControl from '../../hooks/useControl';
-import IUser from '../../types/user';
+import { IInputStatus } from '../../types/common';
+import toast from '../../utils/toast';
 
 interface IForm {
   [index: string]: string;
@@ -26,17 +29,10 @@ interface IValid {
 }
 
 const ChangePassword = ({ navigation }: { navigation: any }) => {
-  const user = useSelector((state: any) => state.user as IUser);
   const [state, setState] = useState<IForm>({
     old: '',
     new: '',
     confirm: '',
-  });
-
-  const [valid, setValid] = useState<IValid>({
-    old: true,
-    new: true,
-    confirm: true,
   });
 
   const [showPassword, setShowPassword] = useState<IValid>({
@@ -48,29 +44,16 @@ const ChangePassword = ({ navigation }: { navigation: any }) => {
   const [isConfirm, setIsConfirm] = useState(false);
   const { control, setControl } = useControl({ loading: false });
 
-  const validate = (label: string) => {
-    // new / confirm password
-    if (['new', 'confirm'].includes(label) && state.new && state.confirm) {
-      // diff password
-      if (state.new !== state.confirm) {
-        setValid({ ...valid, [label]: false });
-        ToastAndroid.show(
-          'New password & confirm password are different.',
-          ToastAndroid.SHORT,
-        );
-      }
-      // valid
-      else setValid({ ...valid, new: true, confirm: true });
-    }
-    // old password
-    else setValid({ ...valid, [label]: !!state[label] });
-  };
-
   const handleSave = async () => {
     // validation
-    if (!valid.new || !valid.old || !valid.confirm) return;
-    if (!state.new || !state.old || !state.confirm) return;
-    if (state.new !== state.confirm) return;
+    if (!state.new || !state.old || !state.confirm) {
+      toast('Please fill in all the fields.');
+      return;
+    }
+    if (state.new !== state.confirm) {
+      toast('New password & confirm password are different.');
+      return;
+    }
     if (!isConfirm) {
       setIsConfirm(true);
       return;
@@ -81,9 +64,9 @@ const ChangePassword = ({ navigation }: { navigation: any }) => {
       setControl(prev => ({ ...prev, isBlock: true, loading: true }));
       setIsConfirm(false);
 
-      await userApi.changePassword({});
+      await userApi.changePassword({ oldPass: state.old, newPass: state.new });
 
-      ToastAndroid.show('Password Updated!', ToastAndroid.SHORT);
+      toast('Password Updated!');
       navigation.goBack();
     } catch (error) {
       console.error(error, 'errUpdatePass');
@@ -95,60 +78,49 @@ const ChangePassword = ({ navigation }: { navigation: any }) => {
 
   return (
     <View style={commonStyles.pageStyles}>
+      <StatusHeader
+        bgColor={control.isConfirm ? 'rgba(0,0,0,0.3)' : undefined}
+      />
       {control.loading && <Loading />}
       <Header navigation={navigation} title="Change Password" showBack />
 
       <View
         style={{
           width: '92%',
-          marginVertical: 20,
           marginLeft: 'auto',
           marginRight: 'auto',
           display: 'flex',
           flexDirection: 'column',
-          rowGap: 20,
         }}>
         {Object.keys(state).map(label => {
           return (
-            <TextInput
+            <CTextInput
               key={label}
-              style={{ height: 50 }}
-              label={`${label[0].toUpperCase()}${label.slice(1)} Password`}
-              value={state[label]}
-              onChangeText={value => setState({ ...state, [label]: value })}
-              secureTextEntry={!showPassword[label]}
-              keyboardType={'default'}
-              right={
-                <TextInput.Icon
-                  icon={showPassword[label] ? 'eye' : 'eye-off'}
-                  onPress={() =>
-                    setShowPassword({
-                      ...showPassword,
-                      [label]: !showPassword[label],
-                    })
-                  }
-                />
-              }
-              onBlur={() => validate(label)}
-              error={!valid[label]}
+              customStyles={{ marginBottom: 15 }}
+              status={IInputStatus.EMPTY}
+              props={{
+                label: `${label[0].toUpperCase()}${label.slice(1)} Password`,
+                value: state[label],
+                onChangeText: (password: string) =>
+                  setState({ ...state, [label]: password }),
+                secureTextEntry: !showPassword[label],
+                right: (
+                  <TextInput.Icon
+                    icon={showPassword[label] ? 'eye' : 'eye-off'}
+                    onPress={() =>
+                      setShowPassword({
+                        ...showPassword,
+                        [label]: !showPassword[label],
+                      })
+                    }
+                  />
+                ),
+              }}
             />
           );
         })}
 
-        <Button
-          disabled={
-            !valid.old ||
-            !valid.confirm ||
-            !valid.new ||
-            !state.old ||
-            !state.confirm ||
-            !state.new
-          }
-          mode="contained"
-          onPress={handleSave}
-          style={{ marginBottom: 10 }}>
-          Save
-        </Button>
+        <CButton handlePress={handleSave} text="Save" margin={0} />
       </View>
 
       <CModal

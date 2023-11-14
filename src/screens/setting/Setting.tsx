@@ -1,5 +1,7 @@
 import { Camera } from 'phosphor-react-native';
+import { useEffect, useState } from 'react';
 import { TouchableOpacity, View, Text } from 'react-native';
+import ColorPicker from 'react-native-wheel-color-picker';
 import { useDispatch, useSelector } from 'react-redux';
 
 import userApi from '../../api/user';
@@ -13,12 +15,75 @@ import ProfileImage from '../../components/contact/ProfileImage';
 import ProfileCellInfo from '../../components/setting/ProfileCellInfo';
 import { commonStyles, themeConfig } from '../../constants/styles';
 import useControl from '../../hooks/useControl';
+import { setThemeColorAction } from '../../store/sliceTheme';
 import { changeUserInfoAction, logoutAction } from '../../store/sliceUser';
 import { ITheme } from '../../types/theme';
 import IUser from '../../types/user';
 import invertColor from '../../utils/invertColor';
 import selectMedia from '../../utils/selectMedia';
 import toast from '../../utils/toast';
+
+const RightChild = () => {
+  const dispatch = useDispatch();
+  const theme = useSelector((state: any) => state.theme as ITheme);
+  const [show, setShow] = useState(false);
+  const [themeColor, setThemeColor] = useState(theme.themeColor);
+
+  const handlePress = () => {
+    setShow(true);
+  };
+  const handleChangeColor = (color: string) => {
+    console.log(color, 'colorChange');
+    setThemeColor(color);
+  };
+  const handleConfirm = () => {
+    dispatch(setThemeColorAction(themeColor));
+  };
+  const handleCancel = () => {
+    setShow(false);
+    setThemeColor(theme.themeColor);
+  };
+
+  return (
+    <View
+      style={{
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+      }}>
+      <TouchableOpacity
+        onPress={handlePress}
+        style={{
+          width: 25,
+          height: 25,
+          borderRadius: 5,
+          borderWidth: 1,
+          borderColor: invertColor(theme.themeColor),
+          backgroundColor: theme.themeColor,
+        }}
+      />
+
+      <CModal
+        show={show}
+        handleConfirm={handleConfirm}
+        handleCancel={handleCancel}>
+        <View
+          onStartShouldSetResponder={() => true}
+          onTouchEnd={e => e.stopPropagation()}
+          style={{ paddingHorizontal: 40, height: 300, paddingVertical: 20 }}>
+          <ColorPicker
+            color={themeColor}
+            thumbSize={20}
+            sliderSize={20}
+            swatches={false}
+            gapSize={10}
+            onColorChangeComplete={handleChangeColor}
+          />
+        </View>
+      </CModal>
+    </View>
+  );
+};
 
 const Setting = ({ navigation }: { navigation: any }) => {
   const user = useSelector((state: any) => state.user as IUser);
@@ -85,7 +150,11 @@ const Setting = ({ navigation }: { navigation: any }) => {
       <StatusHeader
         bgColor={control.isConfirm ? 'rgba(0,0,0,0.3)' : undefined}
       />
-      <Header navigation={navigation} title="Profile" />
+      <Header
+        navigation={navigation}
+        title="Profile"
+        RightChild={() => <RightChild />}
+      />
       <View
         style={{
           flex: 1,

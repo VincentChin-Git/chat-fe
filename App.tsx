@@ -15,6 +15,7 @@ import NewContact from './src/screens/contact/NewContact';
 import SearchContact from './src/screens/contact/SearchContact';
 import Home from './src/screens/index/Home';
 import Index from './src/screens/index/Index';
+import ChangePassword from './src/screens/setting/ChangePassword';
 import Setting from './src/screens/setting/Setting';
 import SettingDetail from './src/screens/setting/SettingDetail';
 import appStore from './src/store/store';
@@ -23,6 +24,7 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
   const routes: { name: string; elem: (props: any) => React.JSX.Element }[] = [
+    { name: 'ChangePassword', elem: ChangePassword },
     { name: 'Chat', elem: Chat },
     { name: 'Contact', elem: Contact },
     { name: 'Contacts', elem: Contacts },
