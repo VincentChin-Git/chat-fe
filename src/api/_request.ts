@@ -4,7 +4,7 @@ import axios, { AxiosError } from 'axios';
 import { IHttpData, IHttpErrorData } from '../types/request';
 import toast from '../utils/toast';
 
-const baseUrl = process.env.EXPO_PUBLIC_API_URL;
+const baseUrl = 'http://13.213.67.60:5051/api';
 
 const getRequest = async (url: string, params: any) => {
   const authToken = await AsyncStorage.getItem('userAuthToken');

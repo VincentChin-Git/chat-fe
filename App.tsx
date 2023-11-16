@@ -1,7 +1,9 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import * as Sentry from '@sentry/react-native';
 import React from 'react';
-import { PaperProvider } from 'react-native-paper';
+import { PaperProvider, MD3LightTheme } from 'react-native-paper';
+import { ThemeProp } from 'react-native-paper/lib/typescript/types';
 import { Provider } from 'react-redux';
 
 import ForgetPassword from './src/screens/auth/ForgetPassword';
@@ -20,9 +22,13 @@ import Setting from './src/screens/setting/Setting';
 import SettingDetail from './src/screens/setting/SettingDetail';
 import appStore from './src/store/store';
 
+Sentry.init({
+  dsn: 'https://6e6467c8c00e549b4ef368505d7af47b@o4505594355187712.ingest.sentry.io/4506233191006208',
+});
+
 const Stack = createNativeStackNavigator();
 
-export default function App() {
+const App = () => {
   const routes: { name: string; elem: (props: any) => React.JSX.Element }[] = [
     { name: 'ChangePassword', elem: ChangePassword },
     { name: 'Chat', elem: Chat },
@@ -42,9 +48,15 @@ export default function App() {
 
   console.log(process.env.EXPO_PUBLIC_API_URL, 'Config');
 
+  // set custom theme
+  const theme: ThemeProp = {
+    ...MD3LightTheme,
+    dark: false, // use only light theme
+  };
+
   return (
     <Provider store={appStore}>
-      <PaperProvider>
+      <PaperProvider theme={theme}>
         <NavigationContainer>
           <Stack.Navigator initialRouteName="Index">
             {routes.map(route => (
@@ -60,4 +72,6 @@ export default function App() {
       </PaperProvider>
     </Provider>
   );
-}
+};
+
+export default Sentry.wrap(App);
