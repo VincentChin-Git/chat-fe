@@ -22,7 +22,7 @@
     "@react-navigation/native": "^6.1.9",
     "@react-navigation/native-stack": "^6.9.16",
     "@reduxjs/toolkit": "^1.9.7",
-    "@sentry/react-native": "^5.13.0",
+    "@sentry/react-native": "5.5.0",
     "axios": "^1.6.0",
     "dayjs": "^1.11.10",
     "expo": "~49.0.15",
