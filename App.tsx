@@ -1,10 +1,11 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import * as Sentry from '@sentry/react-native';
+import * as Device from 'expo-device';
 import React from 'react';
 import { PaperProvider, MD3LightTheme } from 'react-native-paper';
 import { ThemeProp } from 'react-native-paper/lib/typescript/types';
 import { Provider } from 'react-redux';
+import 'react-native-gesture-handler';
 
 import ForgetPassword from './src/screens/auth/ForgetPassword';
 import Login from './src/screens/auth/Login';
@@ -21,10 +22,6 @@ import ChangePassword from './src/screens/setting/ChangePassword';
 import Setting from './src/screens/setting/Setting';
 import SettingDetail from './src/screens/setting/SettingDetail';
 import appStore from './src/store/store';
-
-Sentry.init({
-  dsn: 'https://6e6467c8c00e549b4ef368505d7af47b@o4505594355187712.ingest.sentry.io/4506233191006208',
-});
 
 const Stack = createNativeStackNavigator();
 
@@ -47,6 +44,7 @@ const App = () => {
   ];
 
   console.log(process.env.EXPO_PUBLIC_API_URL, 'Config');
+  console.log(Device, 'device');
 
   // set custom theme
   const theme: ThemeProp = {
@@ -74,4 +72,4 @@ const App = () => {
   );
 };
 
-export default Sentry.wrap(App);
+export default App;

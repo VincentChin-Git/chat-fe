@@ -6,19 +6,16 @@ import { useSelector } from 'react-redux';
 import userApi from '../../api/user';
 import CButton from '../../components/common/CButton';
 import CTextInput from '../../components/common/CTextInput';
-import Footer from '../../components/common/Footer';
 import Header from '../../components/common/Header';
 import StatusHeader from '../../components/common/StatusHeader';
 import { commonStyles } from '../../constants/styles';
 import useControl from '../../hooks/useControl';
 import { IInputStatus } from '../../types/common';
 import { ITheme } from '../../types/theme';
-import IUser from '../../types/user';
 import toast from '../../utils/toast';
 
 const ResetPassword = ({ navigation, route }: any) => {
   const theme = useSelector((state: any) => state.theme as ITheme);
-  const user = useSelector((state: any) => state.user as IUser);
   const { params } = route;
   const { userId, code }: { userId: string; code: string } = params;
   if (!userId || !code) {

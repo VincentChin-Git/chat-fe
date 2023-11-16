@@ -1,5 +1,4 @@
 import { Text, View } from 'react-native';
-import { useSelector } from 'react-redux';
 
 import Footer from '../../components/common/Footer';
 import Header from '../../components/common/Header';
@@ -7,11 +6,9 @@ import StatusHeader from '../../components/common/StatusHeader';
 import ProfileImage from '../../components/contact/ProfileImage';
 import { commonStyles } from '../../constants/styles';
 import { IContactPopulate } from '../../types/contact';
-import { ITheme } from '../../types/theme';
 import toast from '../../utils/toast';
 
 const Contact = ({ navigation, route }: { navigation: any; route: any }) => {
-  const theme = useSelector((state: any) => state.theme as ITheme);
   const { params } = route;
   const {
     contactId,

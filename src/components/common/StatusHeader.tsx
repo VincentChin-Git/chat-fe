@@ -1,4 +1,4 @@
-import { StatusBar as SB } from 'expo-status-bar';
+// import { StatusBar as SB } from 'expo-status-bar';
 import { StatusBar, View } from 'react-native';
 
 const StatusHeader = ({ bgColor = 'transparent' }) => {
@@ -6,7 +6,7 @@ const StatusHeader = ({ bgColor = 'transparent' }) => {
 
   return (
     <>
-      <SB backgroundColor={bgColor}></SB>
+      {/* <SB backgroundColor={bgColor}></SB> */}
       <View
         style={{
           backgroundColor: bgColor,
