@@ -5,7 +5,6 @@ import React from 'react';
 import { PaperProvider, MD3LightTheme } from 'react-native-paper';
 import { ThemeProp } from 'react-native-paper/lib/typescript/types';
 import { Provider } from 'react-redux';
-import 'react-native-gesture-handler';
 
 import ForgetPassword from './src/screens/auth/ForgetPassword';
 import Login from './src/screens/auth/Login';
